@@ -119,7 +119,7 @@ function locAndCopFiles(slot: Slot|MaterialSlot, dataFolder: string, extractFold
                     texPath = texPath.replace(/\\/g, "/");
                     const idx = texPath.lastIndexOf("/");
 
-                    const tarLoc = path.join(copyLoc, texPath.substring(idx+1))
+                    const tarLoc = path.join(copyLoc, texPath.substring(idx+1));
 
                     fs.copyFileSync(texPath, tarLoc);
                 } else {
@@ -150,16 +150,16 @@ function locAndCopFiles(slot: Slot|MaterialSlot, dataFolder: string, extractFold
 
 
         const matCopyLoc = path.join(dataFolder, "assets", "materials", slot.slotName);
+        
+        if (!fs.existsSync(matCopyLoc)) fs.mkdirSync(matCopyLoc, { recursive: true });
 
         let matPath = path.join(extractFolder, slot.materialInfo.matPath as string);
 
-        if (fs.existsSync(matCopyLoc)) {
-            matPath = matPath.replace(/\\/g, "/");
-            const idx = matPath.lastIndexOf("/");
+        matPath = matPath.replace(/\\/g, "/");
+        const idx = matPath.lastIndexOf("/");
 
-            const tarLoc = path.join(matCopyLoc, matPath.substring(idx));
-            fs.copyFileSync(matPath, tarLoc);
-        }
+        const tarLoc = path.join(matCopyLoc, matPath.substring(idx));
+        fs.copyFileSync(matPath, tarLoc);
 
 
         const textures = Object.values(slot.materialInfo.ddsPaths);
