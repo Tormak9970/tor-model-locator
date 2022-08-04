@@ -3,6 +3,8 @@ import path from 'path';
 
 enum SlotNames {
     SKIN_MATS='skinMats',
+    FACE="face",
+    FACE_HAIR="faceHair",
     HEAD='head',
     HAIR='hair',
     BOOT='boot',
